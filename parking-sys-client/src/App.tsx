@@ -1,8 +1,8 @@
-import LandingPage from "./components/landingPage/LandingPage";
+import AppRoutes from "./routes";
 
 function App() {
   return (
-    <LandingPage/>
+    <AppRoutes/>
   );
 }
 
