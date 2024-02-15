@@ -13,7 +13,7 @@ const ParkingScreen = () => {
         </div>
         {/* CONTENT */}
         <div className="w-full flex justify-between h-[70%] p-1">
-            <div className="w-[50%]">
+            <div className="w-full">
                 <ParkingMatrix />
             </div>
         </div>
