@@ -22,11 +22,12 @@ const ParkingSlot = () => {
             [ParkingStates.VACANT]: <ViewForVacant/>,
             [ParkingStates.OCCUPIED]: <ViewForOccupied/>
         }[parkingState];
+    const colorLabel = parkingState === ParkingStates.VACANT ? "bg-lime-300" : "bg-red-500"
 
     return (
         <div className="border-2 w-full min-h-[10rem] bg-orange-200 rounded-lg shadow-sm flex hover:opacity-80 cursor-pointer">
-            <div className="fixed">
-                Slot Code
+            <div className={"fixed h-10 w-10  m-auto " + colorLabel} >
+                <p className="h-full w-full text-center">A-1</p>
             </div>
             {view}
         </div>
