@@ -1,5 +1,6 @@
 import pkg from 'pg';
 import createUserTable from './user.model.js';
+import createParkingTable from './parking.model.js'
 
 const { Pool } = pkg;
 
@@ -14,6 +15,7 @@ const pool = new Pool({
 export async function initializeDatabase() {
   try {
     await createUserTable();
+    await createParkingTable();
   } catch (error) {
     throw new Error('Error initializing database: ' + error.message);
   }

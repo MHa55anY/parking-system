@@ -1,5 +1,5 @@
 import jwt from 'jsonwebtoken';
-import { ACCESS_TOKEN_SECRET } from '../routes/secret';
+import { ACCESS_TOKEN_SECRET } from '../routes/secret.js';
 
 export const authenticateToken = (req, res, next) => {
     const authHeader = req.headers['authorization'];

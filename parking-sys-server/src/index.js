@@ -6,6 +6,7 @@ import cors from 'cors';
 import express from 'express';
 import { initializeDatabase } from './models/common.js';
 import userRoutes from './routes/auth.js';
+import parkingRoutes from './routes/parking.js';
 
 const app = express();
 const users = [];
@@ -16,6 +17,7 @@ app.use(express.json())
 
 //routes
 app.use('/user', userRoutes);
+app.use('/parking', parkingRoutes);
 
 initializeDatabase().then(() => {
     app.listen(5000, () => console.log("server has started on port 5000"))
