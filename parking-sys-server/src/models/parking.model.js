@@ -10,7 +10,8 @@ const createParkingTable = async () => {
             coordinate VARCHAR(20) NOT NULL,
             occupied BOOLEAN DEFAULT FALSE,
             userId INTEGER NOT NULL,
-            FOREIGN KEY (userId) REFERENCES users(id)
+            FOREIGN KEY (userId) REFERENCES users(id) ON DELETE CASCADE,
+            CONSTRAINT unique_code_userId UNIQUE (code, userId)
         );
       `);
       console.log('Parking table created successfully');
