@@ -1,8 +1,12 @@
 import express from 'express';
 import bcrypt from 'bcrypt';
 import pool from '../models/common.js'
+import jwt from 'jsonwebtoken';
 
 const userRoutes = express.Router();
+
+//!!Ideally placed in .env but placed here just for demo purposes
+const ACCESS_TOKEN_SECRET = '882e49eba54a0f9dca754c2140d8eff9510d51de9cf7afb4d745fd3ab70e3d6ccff65d6eac0958fc1815ddddcc178f0f04f88d88d8dcbde36327a9ace702563d';
 
 userRoutes.post('/register', async (req, res) => {
     const {body: {name, password}} = req;
@@ -26,12 +30,12 @@ userRoutes.post('/login', async (req, res) => {
      const {body: {name, password}} = req;
      const client = await pool.connect();
      try {
-        const user = await client.query(`SELECT password FROM users WHERE username='${name}'`);
-        console.log(user.rows)
+        const user = await client.query(`SELECT * FROM users WHERE username='${name}'`);
         if (user.rowCount > 0) {
             try {
                 if (await bcrypt.compare(password, user.rows?.[0].password)) {
-                    return res.status(200).json({ success: true, message: 'Login successful!' });
+                    const accessToken = jwt.sign(user.rows?.[0], ACCESS_TOKEN_SECRET);
+                    return res.status(200).json({ success: true, message: 'Login successful!', accessToken });
                 }
                 else return res.status(401).json({ success: false, message: 'Incorrect Password!' });
             } catch (error) {
