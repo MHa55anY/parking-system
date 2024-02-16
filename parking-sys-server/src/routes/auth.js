@@ -2,11 +2,9 @@ import express from 'express';
 import bcrypt from 'bcrypt';
 import pool from '../models/common.js'
 import jwt from 'jsonwebtoken';
+import { ACCESS_TOKEN_SECRET } from './secret.js';
 
 const userRoutes = express.Router();
-
-//!!Ideally placed in .env but placed here just for demo purposes
-const ACCESS_TOKEN_SECRET = '882e49eba54a0f9dca754c2140d8eff9510d51de9cf7afb4d745fd3ab70e3d6ccff65d6eac0958fc1815ddddcc178f0f04f88d88d8dcbde36327a9ace702563d';
 
 userRoutes.post('/register', async (req, res) => {
     const {body: {name, password}} = req;
