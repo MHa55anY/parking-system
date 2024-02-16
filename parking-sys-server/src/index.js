@@ -12,7 +12,7 @@ const app = express();
 const users = [];
 
 // middleware
-// app.use(cors())
+app.use(cors())
 app.use(express.json())
 
 //routes
