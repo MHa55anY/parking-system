@@ -1,8 +1,14 @@
+import { Toaster } from "react-hot-toast";
 import AppRoutes from "./routes";
+import { BrowserRouter  } from "react-router-dom";
 
 function App() {
+  console.log("TRIGGERED")
   return (
-    <AppRoutes/>
+    <BrowserRouter>
+      <Toaster />
+      <AppRoutes />
+    </BrowserRouter>
   );
 }
 
