@@ -2,7 +2,7 @@
   "name": "parking-sys-server",
   "version": "1.0.0",
   "description": "Server for the parking system",
-  "main": "index.js",
+  "main": "src/index.js",
   "scripts": {
     "devStart": "nodemon server.js"
   },
@@ -14,9 +14,11 @@
     "body-parser": "^1.20.2",
     "cors": "^2.8.5",
     "express": "^4.18.2",
-    "graphql": "^16.8.1"
+    "graphql": "^16.8.1",
+    "pg": "^8.11.3"
   },
   "devDependencies": {
     "nodemon": "^3.0.3"
-  }
+  },
+  "type": "module"
 }
