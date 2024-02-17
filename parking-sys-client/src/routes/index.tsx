@@ -5,7 +5,6 @@ import useAuth from "../hooks/useAuth";
 
 const AppRoutes = () => {
     const { isAuthenticated } = useAuth();
-    console.log("triggered")
     return(
         <Routes>
             <Route
@@ -14,7 +13,7 @@ const AppRoutes = () => {
             />
             <Route
                 path="/parking"
-                element={isAuthenticated() ? <ParkingScreen /> : <Navigate to="/" state={{isFallback: true}}/>}
+                element={isAuthenticated() ? <ParkingScreen /> :  <Navigate to="/" />}
             />
         </Routes>
     )

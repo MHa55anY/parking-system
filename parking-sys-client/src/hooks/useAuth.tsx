@@ -9,6 +9,7 @@ interface AuthStore {
   register: (creds: { userName: string; password: string }) => Promise<void>;
   logout: () => void;
   isAuthenticated: () => boolean;
+  isGracefulLogout: boolean
 }
 
 const useAuth = create<AuthStore>((set, get) => ({
@@ -17,6 +18,7 @@ const useAuth = create<AuthStore>((set, get) => ({
     try {
       const { data } = await loginUser(creds);
       if (data?.success) {
+        set({isGracefulLogout: false})
         localStorage.setItem('authToken', data?.accessToken);
         set({ authToken: data?.accessToken });
         toast.success("You have successfully Logged In 😀!");
@@ -50,10 +52,13 @@ const useAuth = create<AuthStore>((set, get) => ({
     }
   },
   logout: () => {
+    set({isGracefulLogout: true})
     localStorage.removeItem('authToken');
     set({ authToken: null });
+    toast.success("You have logged out!");
   },
   isAuthenticated: () => !!get().authToken,
+  isGracefulLogout: false
 }));
 
 export default useAuth;

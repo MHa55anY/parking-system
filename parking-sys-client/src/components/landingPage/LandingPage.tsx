@@ -1,20 +1,11 @@
-import { useLocation } from "react-router-dom";
+import useAuth from "../../hooks/useAuth";
 import LoginCard from "./LoginCard"
 import WelcomeText from "./WelcomeText"
-import { useEffect } from "react";
 import toast from "react-hot-toast";
 
 const LandingPage = () => {
-  const location = useLocation();
-  const isFallback = location.state
-
-  useEffect(() =>{ 
-    console.log(isFallback)
-    if(isFallback)
-      toast.error("You are not allowed to view this resource, please login!")
-    window.history.replaceState({}, '/')
-  },[isFallback])
-
+  const {isGracefulLogout, isAuthenticated} = useAuth();
+  if(!isAuthenticated() && !isGracefulLogout) toast.error("You are not allowed to view this resource!")
   return (
     <div className="h-full">
         <div className="absolute inset-0 -z-10" style={{backgroundImage: 'url(/images/garage_image.jpg)', backgroundSize: 'cover', filter: 'blur(10px)'}} />
