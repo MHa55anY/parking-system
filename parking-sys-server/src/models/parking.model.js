@@ -1,3 +1,4 @@
+import ParkingStates from '../types/ParkingStatesEnum.js';
 import pool from './common.js';
 
 const createParkingTable = async () => {
@@ -8,7 +9,7 @@ const createParkingTable = async () => {
             id SERIAL PRIMARY KEY,
             code VARCHAR(255) NOT NULL,
             coordinate VARCHAR(20) NOT NULL,
-            occupied BOOLEAN DEFAULT FALSE,
+            status VARCHAR(20) NOT NULL DEFAULT '${ParkingStates.VACANT}',
             userId INTEGER NOT NULL,
             FOREIGN KEY (userId) REFERENCES users(id) ON DELETE CASCADE,
             CONSTRAINT unique_code_userId UNIQUE (code, userId)

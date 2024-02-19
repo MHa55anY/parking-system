@@ -1,10 +1,8 @@
 import { FC, useState } from "react"
 import { IoMdAdd } from "react-icons/io";
-
-enum ParkingStates {
-    VACANT = 'vacant',
-    OCCUPIED = 'occupied'
-}
+import ParkingStates from "./types/ParkingStatesEnum";
+import useParkVehicleModal from "../../hooks/useParkVehicleModal";
+import IParkngSlot from "./types/IParkingSlot";
 
   // PARKING STRRUCTURE
   // {
@@ -26,17 +24,16 @@ interface ParkingSlotProps {
     // numberPlate: string;
     // entryTime: Date;
     // isPaymentDone: boolean;
-    onClick?: () => void
 }
 
-const ParkingSlot: FC<ParkingSlotProps> = ({
-        onClick
-    }) => {
-    const [parkingState, setParkingState] = useState<ParkingStates>(ParkingStates.VACANT);
+const ParkingSlot: FC<IParkngSlot & {
+    onChangeStatus: (index: number, status: ParkingStates) => void 
+}> = ({onChangeStatus, ...props}) => {
+    const {onOpen} = useParkVehicleModal();
     const ViewForVacant = () => (
         <button 
-            className="p-8 h-[20%] w-[20%] hover:bg-red-400 shadow-md rounded-full m-auto flex items-center justify-center " 
-            onClick={onClick}
+            className="p-8 h-[20%] w-[20%] hover:bg-red-400 shadow-md rounded-full m-auto flex items-center justify-center"
+            onClick={onOpen}
         >
             <div>
                 <IoMdAdd className="text-[40px]"/>
@@ -51,14 +48,14 @@ const ParkingSlot: FC<ParkingSlotProps> = ({
     const view =  {
             [ParkingStates.VACANT]: <ViewForVacant/>,
             [ParkingStates.OCCUPIED]: <ViewForOccupied/>
-        }[parkingState];
+        }[props.status];
 
-    const colorLabel = parkingState === ParkingStates.VACANT ? "bg-lime-500" : "bg-red-500"
+    const colorLabel = props.status === ParkingStates.VACANT ? "bg-lime-500" : "bg-red-500"
 
     return (
         <div className="border-2 w-full min-h-[10rem] bg-orange-200 rounded-lg shadow-lg flex hover:opacity-80 cursor-pointer">
             <div className={"fixed rounded-sm h-8 w-10  m-auto " + colorLabel} >
-                <p className="h-full w-full text-center">A-1</p>
+                <p className="h-full w-full text-center">{props.code}</p>
             </div>
             {view}
         </div>
