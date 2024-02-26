@@ -28,7 +28,7 @@ const useAuth = create<AuthStore>((set, get) => ({
     } catch (error) {
       if (isAxiosError(error)) {
         const message = error?.response?.data?.message;
-        toast.error(message + "🤔");
+        toast.error((message ?? "Server not running!") + "🤔");
       } else {
         toast.error("An unexpected error occurred 😔");
       }
