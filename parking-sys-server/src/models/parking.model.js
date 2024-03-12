@@ -17,7 +17,7 @@ const createParkingTable = async () => {
       `);
       console.log('Parking table created successfully');
     } catch (error) {
-      console.error('Error creating user table:', error);
+      console.error('Error creating parking table:', error);
     } finally {
       client.release();
     }

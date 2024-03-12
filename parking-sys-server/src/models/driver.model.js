@@ -9,12 +9,14 @@ const createDriverTable = async () => {
             name VARCHAR(100) NOT NULL,
             phone_number VARCHAR(20) UNIQUE NOT NULL,
             vehicle_number VARCHAR(20) UNIQUE NOT NULL,
-            vehicle_model VARCHAR(20) 
+            vehicle_model VARCHAR(20),
+            parking_id INTEGER NOT NULL,
+            FOREIGN KEY (parking_id) REFERENCES parking(id) ON DELETE CASCADE
         );
       `);
       console.log('driver table created successfully');
     } catch (error) {
-      console.error('Error creating user table:', error);
+      console.error('Error creating driver table:', error);
     } finally {
       client.release();
     }
