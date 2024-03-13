@@ -9,7 +9,7 @@ const ParkingScreen = () => {
         <Navbar/>
         {/* HEADER */}
         <div className="w-full text-2xl text-center font-bold p-8">
-            Play around with the parking matrix on the left
+            Play around with the parking matrix!
         </div>
         {/* CONTENT */}
         <div className="w-full flex justify-between h-[70%] p-1">
