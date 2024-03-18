@@ -1,4 +1,3 @@
-import PaymentStatesEnum from '../types/PaymentStatesEnum.js';
 import pool from './common.js';
 
 const createParkingFeesTable = async () => {
@@ -9,7 +8,7 @@ const createParkingFeesTable = async () => {
             id SERIAL PRIMARY KEY,
             payment_code VARCHAR(255) NOT NULL,
             amount  NUMERIC(15, 2) NOT NULL,
-            FOREIGN KEY (driver_id) REFERENCES driver(id),
+            vehicle_number VARCHAR(20) UNIQUE NOT NULL,
             createdOn timestamp NOT NULL DEFAULT '${new Date()}', 
             updateOn timestamp NOT NULL DEFAULT '${new Date()}'
         );
