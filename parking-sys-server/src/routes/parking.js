@@ -6,16 +6,25 @@ import ParkingStates from '../types/ParkingStatesEnum.js';
 const parkingRoutes = express.Router();
 
 //expect -> {code: 'dwdfd', coordinate: '0,0', userId: loggedInUser}
-parkingRoutes.post('/occupy-parking-slot', authenticateToken, async (req, res) => {
+parkingRoutes.put('/occupy-parking-slot', authenticateToken, async (req, res) => {
     const {body} = req;
-    let query = 'INSERT INTO parking (code, coordinate, userId, status) VALUES'
-    const rowToAdd =`('${body.code}', '${body.coordinate}', ${req.user.id}, '${ParkingStates.OCCUPIED}')`
-    query += rowToAdd + 'RETURNING *';
+    const {code, coordinate, driverName, phoneNumber, vehicleNumber, vehicleModel} = body;
+    let querySlot = 'INSERT INTO parking (code, coordinate, userId, status) VALUES'
+    const slotToAdd =`('${code}', '${coordinate}', ${req.user.id}, '${ParkingStates.OCCUPIED}')`;
+    querySlot += slotToAdd + 'RETURNING *';
 
+    let insertDriver = 'INSERT INTO driver (name, phone_number, vehicle_number, vehicle_model, parking_id) VALUES';
+    let parkingId = null;
     try {
         const client = await pool.connect();
-        const {rows} = await client.query(query);
-        return res.status(200).json({ success: true, message: 'Added slots!', rows})
+        const {rows: slots, error: slotError} = await client.query(querySlot);
+        parkingId = slots[0].id;
+        const driverToAdd = `('${driverName}', '${phoneNumber}', '${vehicleNumber}', '${vehicleModel}', ${parkingId})`;
+        insertDriver += driverToAdd;
+        console.log(insertDriver)
+        const {driver} = await client.query(insertDriver);
+        const result = {slots, driver}
+        return res.status(200).json({ success: true, message: 'Ocuupied Slot!', result})
     } catch (error) {
         console.log(error)
         return res.status(500).json({message: error.message});
