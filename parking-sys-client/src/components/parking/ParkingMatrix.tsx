@@ -20,16 +20,16 @@ const ParkingMatrix = () => {
   useEffect(() => {
     const fetchOccupiedSlotsFn =  async () => {
       try {
-        const { data }: {data: IParkngSlot[]} = await fetchOccupiedSlots();
+        const { data: { rows } }: {data: { rows: IParkngSlot[] }} = await fetchOccupiedSlots();
         setParkingSlots((prev) => {
-          data.forEach((occupiedSlot) => {
+          rows.forEach((occupiedSlot) => {
             const index = prev.findIndex((p) => p.code === occupiedSlot.code);
-            if(index) prev[index] = occupiedSlot;
+            if(index !== -1) prev[index] = occupiedSlot;
           })
           return [...prev];
         })
       } catch (error) {
-        toast.error("Could not load saved parking, please check if the server is running!")
+        toast.error("Could not load saved parking, please check if the server is running!");
       }
     };
     fetchOccupiedSlotsFn();
@@ -38,7 +38,7 @@ const ParkingMatrix = () => {
   return (
     <>
       <div className="grid grid-cols-4 border-2 p-2 gap-2">
-        {parkingSlots.map((props) => <ParkingSlot {...props} onChangeStatus={onChangeStatus} />)}
+        {parkingSlots.map((props) => <ParkingSlot {...props} onChangeStatus={onChangeStatus} key={props.code}/>)}
       </div>
       <ParkingModal />
     </>
