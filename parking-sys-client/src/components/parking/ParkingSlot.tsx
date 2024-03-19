@@ -53,8 +53,8 @@ const ParkingSlot: FC<IParkngSlot & {
     const colorLabel = props.status === ParkingStates.VACANT ? "bg-lime-500" : "bg-red-500"
 
     return (
-        <div className="border-2 w-full min-h-[10rem] bg-orange-200 rounded-lg shadow-lg flex hover:opacity-80 cursor-pointer">
-            <div className={"fixed rounded-sm h-8 w-10  m-auto " + colorLabel} >
+        <div className="relative border-2 w-full min-h-[10rem] bg-orange-200 rounded-lg shadow-lg flex hover:opacity-80 cursor-pointer">
+            <div className={"absolute rounded-sm h-8 w-10  m-auto " + colorLabel} >
                 <p className="h-full w-full text-center">{props.code}</p>
             </div>
             {view}
