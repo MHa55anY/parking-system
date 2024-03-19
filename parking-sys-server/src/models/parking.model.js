@@ -13,8 +13,8 @@ const createParkingTable = async () => {
             userId INTEGER NOT NULL,
             FOREIGN KEY (userId) REFERENCES users(id) ON DELETE CASCADE, 
             CONSTRAINT unique_code_userId UNIQUE (code, userId), 
-            createdOn timestamp NOT NULL DEFAULT '${new Date()}', 
-            updateOn timestamp NOT NULL DEFAULT '${new Date()}'
+            createdOn timestamp NOT NULL DEFAULT '${new Date().toISOString()}',
+            updateOn timestamp NOT NULL DEFAULT '${new Date().toISOString()}'
         );
       `);
       console.log('Parking table created successfully');
