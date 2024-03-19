@@ -12,8 +12,8 @@ const createDriverTable = async () => {
             vehicle_model VARCHAR(20),
             parking_id INTEGER NOT NULL,
             FOREIGN KEY (parking_id) REFERENCES parking(id) ON DELETE CASCADE,
-            createdOn timestamp NOT NULL DEFAULT '${new Date()}',
-            updateOn timestamp NOT NULL DEFAULT '${new Date()}'
+            createdOn timestamp NOT NULL DEFAULT '${new Date().toISOString()}',
+            updateOn timestamp NOT NULL DEFAULT '${new Date().toISOString()}'
         );
       `);
       console.log('driver table created successfully');
