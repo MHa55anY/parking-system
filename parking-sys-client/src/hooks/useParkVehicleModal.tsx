@@ -3,15 +3,17 @@ import ParkingStates from "../components/parking/types/ParkingStatesEnum";
 
 export interface ParkVehicleModalStore {
   isOpen: boolean;
-  onOpen: () => void;
+  currentSlotIndex: number | null;
+  onOpen: (index: number) => void;
   onClose: () => void;
   viewType: ParkingStates;
 }
 
 const useParkVehicleModal = create<ParkVehicleModalStore>((set) => ({
   isOpen: false,
-  onOpen: () => set({ isOpen: true }),
-  onClose: () => set({ isOpen: false }),
+  currentSlotIndex: null,
+  onOpen: (index) => set({ isOpen: true, currentSlotIndex: index}),
+  onClose: () => set({ isOpen: false, currentSlotIndex: null }),
   viewType: ParkingStates.VACANT
 }));
 

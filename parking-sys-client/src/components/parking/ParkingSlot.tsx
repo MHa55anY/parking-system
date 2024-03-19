@@ -1,39 +1,17 @@
-import { FC, useState } from "react"
+import { FC } from "react"
 import { IoMdAdd } from "react-icons/io";
 import ParkingStates from "./types/ParkingStatesEnum";
 import useParkVehicleModal from "../../hooks/useParkVehicleModal";
 import IParkngSlot from "./types/IParkingSlot";
 
-  // PARKING STRRUCTURE
-  // {
-  //   8936dgjs: {
-    //   userName: string
-    //  phoneNumber: number
-  //     model?: string
-  //     numberPlate: string
-  //     entryTime: timestamp
-  //     isPaymentDone: boolean
-  //   }
-  // }
-
-interface ParkingSlotProps {
-    // slotCode: string;
-    // userName: string;
-    // phoneNumber: number;
-    // model?: string;
-    // numberPlate: string;
-    // entryTime: Date;
-    // isPaymentDone: boolean;
-}
-
 const ParkingSlot: FC<IParkngSlot & {
-    onChangeStatus: (index: number, status: ParkingStates) => void 
-}> = ({onChangeStatus, ...props}) => {
+    onChangeStatus: (index: number, status: ParkingStates) => void, parkingIndex: number 
+}> = ({onChangeStatus, parkingIndex, ...props}) => {
     const {onOpen} = useParkVehicleModal();
     const ViewForVacant = () => (
         <button 
             className="p-8 h-[20%] w-[20%] hover:bg-red-400 shadow-md rounded-full m-auto flex items-center justify-center"
-            onClick={onOpen}
+            onClick={() => onOpen(parkingIndex)}
         >
             <div>
                 <IoMdAdd className="text-[40px]"/>

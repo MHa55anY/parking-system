@@ -4,15 +4,15 @@ import { FaRegUser } from "react-icons/fa";
 import { MdOutlinePhone, MdOutlineDirectionsCar } from "react-icons/md";
 import FormInput from "../inputs/FormInput";
 import Modal from "../modal/Modal";
-import useParkVehicleModal, { ParkVehicleModalStore } from "../../hooks/useParkVehicleModal";
+import useParkVehicleModal from "../../hooks/useParkVehicleModal";
 import { FC } from "react";
 import ParkingStates from "./types/ParkingStatesEnum";
 
 interface IParkingModalProps {
-
+  onSubmit: (data: FieldValues) => Promise<void>
 }
 
-const ParkingModal: FC<IParkingModalProps> = () => {
+const ParkingModal: FC<IParkingModalProps> = ({ onSubmit }) => {
     const methods = useForm();
     const {handleSubmit} = methods;
     const {isOpen, onClose, viewType} = useParkVehicleModal();
@@ -47,14 +47,14 @@ const ParkingModal: FC<IParkingModalProps> = () => {
       [ParkingStates.OCCUPIED]: OccupiedView,
       [ParkingStates.VACANT]: VacantView
     }[viewType];
-    const onSubmit = (data: FieldValues) => console.log(data)
+
     const Footer = () => (
       <div className="mt-7 w-full">
         <button 
-            type="submit" 
-            onClick={handleSubmit(onSubmit)}
-            className="bg-orange-400 hover:opacity-80 p-3 rounded-lg w-full text-white"
-            >
+          type="submit" 
+          onClick={handleSubmit(onSubmit)}
+          className="bg-orange-400 hover:opacity-80 p-3 rounded-lg w-full text-white"
+        >
             Submit
         </button>
       </div>
