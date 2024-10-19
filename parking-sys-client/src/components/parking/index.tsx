@@ -11,13 +11,22 @@ const ParkingScreen = () => {
         Play around with the parking matrix!
       </div> */}
       {/* CONTENT */}
-      <div className="h-full flex">
-        <div className="p-1 w-[40%]">
-          <h2 className="dashboard-labels">Parking Availability</h2>
+      <div className="h-full flex gap-2 p-4">
+        <div className="card w-[20%]">
+          <div className="flex justify-between">
+            <h2 className="card-heading">Parking Availability</h2>
+            <button className="hover:opacity-80 bg-slate-300 p-1">
+              Add more
+            </button>
+          </div>
+
           <ParkingMatrix />
         </div>
-        <div className="dashboard-labels">History</div>
-        <div className="dashboard-labels">Statistics</div>
+        <div className="card">
+          <h2 className="card-heading">History</h2>
+          Slot reservation history goes here!
+        </div>
+        <div className="card-heading">Statistics</div>
       </div>
     </div>
   );

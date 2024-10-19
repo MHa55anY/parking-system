@@ -7,10 +7,10 @@ html {
   height: 100%;
 }
 
-.dashboard-labels {
-  @apply text-lg p-4 font-bold;
+.card-heading {
+  @apply text-lg p-2 font-bold;
 }
 
 .card {
-  @apply shadow-lg rounded-lg p-6 bg-white;
+  @apply shadow-lg rounded-lg p-2 bg-white;
 }

@@ -33,7 +33,7 @@ const ParkingSlot: FC<
     props.status === ParkingStates.VACANT ? "bg-lime-500" : "bg-red-500";
 
   return (
-    <div className="relative border-2 w-[20%] bg-orange-200 rounded-lg shadow-lg flex hover:opacity-80 cursor-pointer">
+    <div className="relative border-2 w-20 h-20 bg-orange-200 rounded-lg shadow-lg flex hover:opacity-80 cursor-pointer">
       <div className={"absolute rounded-sm w-10 m-auto " + colorLabel}>
         <p className="w-full text-center">{props.code}</p>
       </div>

@@ -75,7 +75,7 @@ const ParkingMatrix = () => {
 
   return (
     <>
-      <div className="flex flex-row flex-wrap p-2 gap-2">
+      <div className="flex flex-row flex-wrap flex-1 p-2 gap-2">
         {parkingSlots.map((props, index) => (
           <ParkingSlot
             {...props}
