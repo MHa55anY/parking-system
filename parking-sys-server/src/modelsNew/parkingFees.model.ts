@@ -1,9 +1,9 @@
-import pool from './common.js';
+import pool from "./common";
 
 const createParkingFeesTable = async () => {
-    const client = await pool.connect();
-    try {
-      await client.query(`
+  const client = await pool.connect();
+  try {
+    await client.query(`
         CREATE TABLE IF NOT EXISTS parking_fees (
             id SERIAL PRIMARY KEY,
             payment_code VARCHAR(255) NOT NULL,
@@ -13,12 +13,12 @@ const createParkingFeesTable = async () => {
             updateOn timestamp NOT NULL DEFAULT '${new Date().toISOString()}'
         );
       `);
-      console.log('Fees table created successfully');
-    } catch (error) {
-      console.error('Error creating fees table:', error);
-    } finally {
-      client.release();
-    }
+    console.log("Fees table created successfully");
+  } catch (error) {
+    console.error("Error creating fees table:", error);
+  } finally {
+    client.release();
+  }
 };
 
 export default createParkingFeesTable;

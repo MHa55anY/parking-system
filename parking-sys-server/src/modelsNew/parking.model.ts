@@ -1,4 +1,4 @@
-import ParkingStates from "../types/ParkingStatesEnum.js";
+import ParkingStates from "../typesNew/ParkingStatesEnum";
 import pool from "./common.js";
 
 const createParkingTable = async () => {

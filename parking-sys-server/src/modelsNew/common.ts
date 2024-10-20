@@ -1,5 +1,5 @@
 import pkg from "pg";
-import createUserTable from "./user.model";
+import createUserTable from "./UserModel";
 import createParkingTable from "./parking.model";
 import createDriverTable from "./driver.model";
 
@@ -15,7 +15,7 @@ const pool = new Pool({
 
 export async function initializeDatabase() {
   try {
-    await createUserTable();
+    // await createUserTable();
     await createParkingTable();
     await createDriverTable();
   } catch (error: any) {
