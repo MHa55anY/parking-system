@@ -48,7 +48,14 @@ class AuthController extends BaseController {
     }
   }
 
-  public async login(username: string, password: string) {
+  public async login(
+    username: string,
+    password: string
+  ): Promise<{
+    statusCode: number;
+    message: string;
+    accessToken?: string;
+  }> {
     try {
       const user = await UserModel.query(this.transaction).findOne({
         username,
@@ -56,24 +63,31 @@ class AuthController extends BaseController {
       if (!user) {
         throw Error("Username does not exist!");
       }
+
       const { password: hashPassword } = user;
       const isCorrectPassword = await this.isPasswordMatchWithHashed(
         hashPassword,
         password
       );
-      if (isCorrectPassword) {
-        const accessToken = this.generateAccessToken({
-          role: "USER",
-          username,
-        });
-
-        return {
-          statusCode: 200,
-          message: "Logged In Successfully!",
-          accessToken,
-        };
+      if (!isCorrectPassword) {
+        throw Error("Incorrect Password!");
       }
-    } catch (error) {}
+
+      const accessToken = this.generateAccessToken({
+        role: "USER",
+        username,
+      });
+      return {
+        statusCode: 200,
+        message: "Logged In Successfully!",
+        accessToken,
+      };
+    } catch (error) {
+      return {
+        statusCode: 500,
+        message: (error as Error).message,
+      };
+    }
   }
 }
 
