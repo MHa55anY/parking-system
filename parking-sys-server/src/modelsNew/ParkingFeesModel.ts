@@ -1,9 +1,7 @@
-import pool from "./common";
+import BaseModel from "./BaseModel";
 
-const createParkingFeesTable = async () => {
-  const client = await pool.connect();
-  try {
-    await client.query(`
+class ParkingFeesModel extends BaseModel {
+  private CREATE_QUERY = `
         CREATE TABLE IF NOT EXISTS parking_fees (
             id SERIAL PRIMARY KEY,
             payment_code VARCHAR(255) NOT NULL,
@@ -12,13 +10,7 @@ const createParkingFeesTable = async () => {
             createdOn timestamp NOT NULL DEFAULT '${new Date().toISOString()}',
             updateOn timestamp NOT NULL DEFAULT '${new Date().toISOString()}'
         );
-      `);
-    console.log("Fees table created successfully");
-  } catch (error) {
-    console.error("Error creating fees table:", error);
-  } finally {
-    client.release();
-  }
-};
+      `;
+}
 
-export default createParkingFeesTable;
+export default ParkingFeesModel;
