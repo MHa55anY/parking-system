@@ -1,15 +1,22 @@
-import { Transaction } from "objection";
-import knex from "../../config/knex";
+import type { Response } from "express";
 
-interface BaseControllerParams {
-  transaction?: Transaction;
-}
+abstract class BaseController {
+  protected sendSuccess(res: Response, data: any, message: string = "Success") {
+    res.status(200).json({
+      status: "success",
+      message,
+      data,
+    });
+  }
 
-class BaseController {
-  transaction?: Transaction;
-
-  constructor({ transaction }: BaseControllerParams) {
-    this.transaction = transaction;
+  protected sendError(res: Response, error: any, statusCode: number = 500) {
+    res.status(statusCode).json({
+      status: "error",
+      message: typeof error === "string" ? error : error.message,
+      ...(process.env.NODE_ENV === "development" && {
+        errorStack: error.stack,
+      }),
+    });
   }
 }
 
