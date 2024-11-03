@@ -4,7 +4,7 @@ import AuthService from "../services/AuthService";
 import type { Request, Response } from "express";
 
 class AuthController extends BaseController {
-  authService = new AuthService();
+  private authService = new AuthService();
 
   async register(
     req: Request<{}, {}, { username: string; password: string }>,
@@ -37,4 +37,4 @@ class AuthController extends BaseController {
   }
 }
 
-export default AuthController;
+export default new AuthController();

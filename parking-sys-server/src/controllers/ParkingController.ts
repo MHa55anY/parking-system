@@ -41,4 +41,4 @@ class ParkingController extends BaseController {
   }
 }
 
-export default ParkingController;
+export default new ParkingController();

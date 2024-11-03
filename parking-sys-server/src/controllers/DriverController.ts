@@ -24,4 +24,4 @@ class DriverController extends BaseController {
   }
 }
 
-export default DriverController;
+export default new DriverController();
