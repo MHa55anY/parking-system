@@ -2,10 +2,11 @@
   "name": "parking-sys-server",
   "version": "1.0.0",
   "description": "Server for the parking system",
-  "main": "src/index.js",
+  "main": "src/index.ts",
   "scripts": {
     "devStart": "nodemon server.js",
-    "dev": "node dist/index.js"
+    "dev": "node dist/index.js",
+    "compileTs": "tsc"
   },
   "author": "Hassan Yusuf",
   "license": "ISC",
@@ -28,6 +29,5 @@
     "@types/pg": "^8.11.10",
     "nodemon": "^3.0.3",
     "typescript": "^5.6.3"
-  },
-  "type": "module"
+  }
 }
